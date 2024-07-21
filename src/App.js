@@ -1,6 +1,6 @@
 import {Switch, Route} from 'react-router-dom';
 import HomepageComponent from "./page/Homepage/HomepageComponent.jsx";
-import Product from './components/ProductComponent/product.jsx';
+import ShopPage from './page/ShopPage/ShopPageComponent.jsx';
 
 function App() {
  
@@ -8,11 +8,7 @@ function App() {
     <div>
       <Switch>
         <Route path="/" exact component={HomepageComponent} />
-        <Route path="/hats" component={Product} />
-        <Route path="/jackets" component={Product} />
-        <Route path="/sneakers" component={Product} />
-        <Route path="/womens" component={Product} />
-        <Route path="/mens" component={Product} />
+        <Route path="/shop" exact component={ShopPage} />
     </Switch>
     </div>
   );
