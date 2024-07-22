@@ -1,5 +1,6 @@
 import React from "react";
 import SHOP_DATA from './SHOP_DATA.js'
+import CollectionPreviewComponent from '../../components/CollectionPreview/CollectionPreviewComponent.jsx'
 
 class ShopPage extends React.Component{
     constructor(){
@@ -10,14 +11,9 @@ class ShopPage extends React.Component{
     }
     render(){
         return (
-            <div>
+            <div className="shop-page">
                 {
-                   this.state.products.map(category => {
-                   return (
-                   <> <h1>{category.title}</h1>
-                    {category.items.map(item => <p>{item.name}</p>)}</>
-                   )
-                   }) 
+                   this.state.products.map(category => <CollectionPreviewComponent data={category} />) 
                 }
             </div>
         )
