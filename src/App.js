@@ -5,6 +5,7 @@ import ShopPage from './page/ShopPage/ShopPageComponent.jsx';
 import Header from './components/HeaderComponent/HeaderComponent.jsx';
 import SignInSignUpComponent from './page/Signin&Signup/SigninSignupComponent.jsx';
 import {auth,onAuthStateChanged} from './firebase/firebase.js'
+
 class App extends React.Component {
   constructor(){
     super();
