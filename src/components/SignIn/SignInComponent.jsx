@@ -17,10 +17,24 @@ class SignInComponent extends React.Component {
     handleSubmit = async(event) => {
         event.preventDefault();
         try{
-            const email = this.state.email;
-            const password = this.state.password;
-          await createUserWithEmailAndPassword(auth,email , password);
+            const emailInput = this.state.email;
+            const passwordInput = this.state.password;
+          const resposenFromApi =  await fetch("http://localhost:8080/api/v1/user/login", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email : emailInput,
+                    password: passwordInput
+                })
+            })
+            const data = await resposenFromApi.json();
+            if(data){
+                localStorage.setItem("user", JSON.stringify(data));
+                this.props.history.push('/')
 
+            }
         }catch(err){
             console.log("Error: " + err);
 
