@@ -4,7 +4,7 @@ import { ReactComponent as Logo} from '../../assets/logo.svg';
 import {logOut} from '../../firebase/firebase.js'
 import './HeaderStyles.scss';
 
-const Header = ({currentUser}) => {
+const Header = ({currentUser,handleLogout}) => {
     return(
         <div className='header'>
             <Link className="option" to="/">
@@ -13,7 +13,7 @@ const Header = ({currentUser}) => {
             <div className='options'>
                 <Link className="option" to="/shop">SHOP</Link>
                 {
-                    currentUser ? <div className='option' onClick={logOut}>SIGN OUT</div> :<Link className="option" to="/signin">SIGN IN</Link>
+                    currentUser ? <div className='option' onClick={handleLogout}>SIGN OUT</div> :<Link className="option" to="/signin">SIGN IN</Link>
                 }
             </div>
         </div>

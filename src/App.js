@@ -10,17 +10,19 @@ class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      currentUser : null
+      currentUser : JSON.parse(localStorage.getItem('user')) || null,
     }
   }
 
- 
-  
+ handleLogout = () => {
+    this.setState({currentUser : null})
+    localStorage.removeItem('user')
+ }
     render(){
       const {currentUser} = this.state;
       return (
         <div>
-          <Header currentUser={currentUser} />
+          <Header currentUser={currentUser} handleLogout={this.handleLogout} />
           <Switch>
             <Route path="/" exact component={HomepageComponent} />
             <Route path="/shop" component={ShopPage} />

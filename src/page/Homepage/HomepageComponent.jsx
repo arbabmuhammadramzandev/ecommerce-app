@@ -97,23 +97,7 @@ class HomepageComponent extends React.Component{
     render () {
         return (
             <div className="homepage">
-                <button onClick={() => {
-                    const myData = {
-                        name: "muhammad",
-                        age: 26,
-                        dob: "24/jan/1998"
-                    }
-                    localStorage.setItem("userDetails" , JSON.stringify(myData))
-                }}>Save Data in browser</button>
-                <button onClick={() => {
-                    const myData = localStorage.getItem("userDetails");
-                    const convertedtData = JSON.parse(myData)
-                    alert("User details : " + convertedtData.name);
-                }}>Get Item</button>
-                <button onClick={() => {
-                    localStorage.removeItem("userDetails");
-                   
-                }}>Remove Item</button>
+                
             <DirectoryComponent menuitems = {this.state.menuItems}  />
             </div>
             )
