@@ -9,6 +9,7 @@ class ShopPage extends React.Component{
             products: SHOP_DATA
         }
     }
+    
     render(){
         return (
             <div className="shop-page">
