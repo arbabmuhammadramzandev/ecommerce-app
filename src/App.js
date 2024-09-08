@@ -5,7 +5,7 @@ import ShopPage from './page/ShopPage/ShopPageComponent.jsx';
 import Header from './components/HeaderComponent/HeaderComponent.jsx';
 import SignInSignUpComponent from './page/Signin&Signup/SigninSignupComponent.jsx';
 import {auth,onAuthStateChanged} from './firebase/firebase.js'
-
+import AuthProvider from './context/contextApi.js'
 class App extends React.Component {
   constructor(){
     super();
@@ -21,6 +21,7 @@ class App extends React.Component {
     render(){
       const {currentUser} = this.state;
       return (
+  <AuthProvider>
         <div>
           <Header currentUser={currentUser} handleLogout={this.handleLogout} />
           <Switch>
@@ -29,6 +30,7 @@ class App extends React.Component {
            <Route path="/signin" component={SignInSignUpComponent} />
         </Switch>
         </div>
+        </AuthProvider>
       );
     }
 }

@@ -6,89 +6,157 @@ import CustomButton from '../CustomButton/CustomButtonComponent';
 import FormInput from '../FormInput/FormInputComponent';
 import './signin.scss';
 
-class SignInComponent extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            email: '',
-            password: ''
-        }
-    }
-    handleSubmit = async(event) => {
-        event.preventDefault();
-        try{
-            const emailInput = this.state.email;
-            const passwordInput = this.state.password;
-          const resposenFromApi =  await fetch("http://localhost:8080/api/v1/user/login", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email : emailInput,
-                    password: passwordInput
-                })
+const SignInComponent = (props) => {
+    const [user, setUser] = React.useState({
+        email: '',
+        password: ''
+    })
+const  handleSubmit = async(event) => {
+    event.preventDefault();
+    try{
+        const emailInput = user.email;
+        const passwordInput = user.password;
+      const resposenFromApi =  await fetch("http://localhost:8080/api/v1/user/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email : emailInput,
+                password: passwordInput
             })
-            const data = await resposenFromApi.json();
-            if(data){
-                localStorage.setItem("user", JSON.stringify(data));
-                this.props.history.push('/')
-
-            }
-        }catch(err){
-            console.log("Error: " + err);
-
-        }
-        this.setState({
-            email: '',
-            password: ''
         })
-    }
-    handleGoogleSignin = async() => {
-        try{
-           await signInWithGoogle();
+        const data = await resposenFromApi.json();
+        if(data){
+            localStorage.setItem("user", JSON.stringify(data));
+            props.history.push('/')
 
-        }catch(err) {
-            console.log("Error: " + err);
         }
-    } 
-    handleChange = (event) => {
+    }catch(err){
+        console.log("Error: " + err);
+
+    }
+    setUser({
+        email: '',
+        password: ''
+    })
+}
+    const handleChange = (event) => {
         const {name, value} = event.target
-        this.setState({
+        setUser({
             [name] : value
         })
     }
-    render(){
-        return(
-            <div className='sign-in'>
-                <h2>I already have an account.</h2>
-                <span>Sign in with your email and password</span>
-                <form onSubmit={this.handleSubmit}>
-                    
-                    <FormInput
-                    name="email"
-                    type="email"
-                    handleChange={this.handleChange}
-                    value={this.state.email}
-                    label="Email"
-                    required
-                    />
-                    <FormInput
-                    name="password"
-                    type="password"
-                    handleChange={this.handleChange}
-                    value={this.state.password}
-                    label="Password"
-                    required
-                    />
-                 <div className='buttons'>
-                 <CustomButton type='submit'> Sign In </CustomButton>
-                 <CustomButton onClick={this.handleGoogleSignin} isGoogleSignIn> Sign In With Google </CustomButton>
-                 </div>
-                </form>
-            </div>
-        )
-    }
-
+    return (
+        <div className='sign-in'>
+        <h2>I already have an account.</h2>
+        <span>Sign in with your email and password</span>
+        <form onSubmit={handleSubmit}>
+            
+            <FormInput
+            name="email"
+            type="email"
+            handleChange={handleChange}
+            value={user.email}
+            label="Email"
+            required
+            />
+            <FormInput
+            name="password"
+            type="password"
+            handleChange={handleChange}
+            value={user.password}
+            label="Password"
+            required
+            />
+         <div className='buttons'>
+         <CustomButton type='submit'> Sign In </CustomButton>
+         {/* <CustomButton onClick={this.handleGoogleSignin} isGoogleSignIn> Sign In With Google </CustomButton> */}
+         </div>
+        </form>
+    </div>
+    )
 }
+
+
+// class SignInComponent extends React.Component {
+//     constructor(props){
+//         super(props);
+//         this.state = {
+//             email: '',
+//             password: ''
+//         }
+//     }
+//     handleSubmit = async(event) => {
+//         event.preventDefault();
+//         try{
+//             const emailInput = this.state.email;
+//             const passwordInput = this.state.password;
+//           const resposenFromApi =  await fetch("http://localhost:8080/api/v1/user/login", {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify({
+//                     email : emailInput,
+//                     password: passwordInput
+//                 })
+//             })
+//             const data = await resposenFromApi.json();
+//             if(data){
+//                 localStorage.setItem("user", JSON.stringify(data));
+//                 this.props.history.push('/')
+
+//             }
+//         }catch(err){
+//             console.log("Error: " + err);
+
+//         }
+//         this.setState({
+//             email: '',
+//             password: ''
+//         })
+//     }
+//     handleGoogleSignin = async() => {
+//         try{
+//            await signInWithGoogle();
+
+//         }catch(err) {
+//             console.log("Error: " + err);
+//         }
+//     } 
+    
+//     render(){
+//         return(
+//             <div className='sign-in'>
+//                 <h2>I already have an account.</h2>
+//                 <span>Sign in with your email and password</span>
+//                 <form onSubmit={this.handleSubmit}>
+                    
+//                     <FormInput
+//                     name="email"
+//                     type="email"
+//                     handleChange={this.handleChange}
+//                     value={this.state.email}
+//                     label="Email"
+//                     required
+//                     />
+//                     <FormInput
+//                     name="password"
+//                     type="password"
+//                     handleChange={this.handleChange}
+//                     value={this.state.password}
+//                     label="Password"
+//                     required
+//                     />
+//                  <div className='buttons'>
+//                  <CustomButton type='submit'> Sign In </CustomButton>
+//                  <CustomButton onClick={this.handleGoogleSignin} isGoogleSignIn> Sign In With Google </CustomButton>
+//                  </div>
+//                 </form>
+//             </div>
+//         )
+//     }
+
+// }
 export default withRouter(SignInComponent);

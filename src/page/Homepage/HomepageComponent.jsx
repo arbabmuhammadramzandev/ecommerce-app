@@ -1,10 +1,12 @@
-import React from 'react';
+import React,{ useContext }  from 'react';
 import './Homepage.scss'
 import DirectoryComponent from '../../components/Directory/DirectoryComponent.jsx';
+import { AuthContext } from '../../context/contextApi.js';
 
 class HomepageComponent extends React.Component{
     constructor() {
         super();
+
         this.state = {
             menuItems: null
             
@@ -27,6 +29,8 @@ class HomepageComponent extends React.Component{
         })
     }
     render () {
+        // const values = useContext(AuthContext);
+        // console.log("values",values)
         return (
             <div className="homepage">
                 
