@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { ReactComponent as Logo} from '../../assets/logo.svg';
-import {logOut} from '../../firebase/firebase.js'
 import './HeaderStyles.scss';
+import { AuthContext } from '../../context/contextApi';
 
-const Header = ({currentUser,handleLogout}) => {
+const Header = ({handleLogout}) => {
+    const {currentUser} = React.useContext(AuthContext);
     return(
         <div className='header'>
             <Link className="option" to="/">
@@ -15,7 +16,13 @@ const Header = ({currentUser,handleLogout}) => {
                 {
                     currentUser ? <div className='option' onClick={handleLogout}>SIGN OUT</div> :<Link className="option" to="/signin">SIGN IN</Link>
                 }
+                {
+                    currentUser ? <p>{currentUser?.user}</p>: ''
+                }
+           
             </div>
+            
+                
         </div>
     )
 }
